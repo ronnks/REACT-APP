@@ -1,6 +1,8 @@
+import { TeacherTitle } from "./model_lists/enums/teacher_title_enum";
+
 // Class describes the teacher entity; properties & methds.
   export default class Teacher {
-    constructor(private title: String, private firstname: string, private lastname: string, private TNS = 0, private TNC = 0){
+    constructor(private title: TeacherTitle, private firstname: string, private lastname: string, private TNS = 0, private TNC = 0){
         this.title = title;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -8,7 +10,7 @@
         this.TNC = TNC || 0; // total number of courses taught.
     }
 
-    set setTitle(newTitle: string){
+    set setTitle(newTitle: TeacherTitle){
         this.title = newTitle;
     }
 
