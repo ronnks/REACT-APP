@@ -2,7 +2,6 @@
 import Classroom from "../models/classroom";
 import StudentService from "./student_service";
 import AssignmentService from "../services/assignment_service";
-import AssignmentGradeList from "../models/model_lists/assignmentGradeList";
 
 // Class applies service functionality from the Classroom class.
 export default class ClassroomService {
@@ -20,18 +19,21 @@ export default class ClassroomService {
   }
 
   // Given a list of assignment grades (student.assignmentGrades) render each assignments and the score
-  static renderAssignmentsGrades(assignmentGrades: AssignmentGradeList) {
+  static renderAssignmentsGrades(classroom: Classroom) {
     let item: JSX.Element = <></>;
-    classroom.getStudentsList.forEach((assignmentGrade) => {
-      item = (
-        <li>
-          {assignmentGrade.getAssignmentId} - {assignmentGrade.getScore}/
-          {AssignmentService.totalPossiblePoints(
-            classroom,
-            assignmentGrade.getAssignmentId
-          )}
-        </li>
-      );
+
+    classroom.getStudentsList.forEach((student) => {
+      student.getAssignmentGrades.forEach((assignmentGrade) => {
+        item = (
+          <li>
+            {assignmentGrade.getAssignmentId} - {assignmentGrade.getScore}/
+            {AssignmentService.totalPossiblePoints(
+              classroom,
+              assignmentGrade.getAssignmentId
+            )}
+          </li>
+        );
+      });
     });
 
     return (

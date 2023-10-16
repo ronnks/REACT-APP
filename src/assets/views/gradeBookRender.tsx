@@ -32,24 +32,26 @@ export function renderStudents(classroom: Classroom) {
       student.getId
     );
 
-    <div>
-      <li>
-        <div>
-          <strong>{student.getFullname()}</strong>
-        </div>
-        <div>
-          Grade: {AssignmentGradeService.getLetterGrade(student.getId)} -{" "}
-          {calcSOP} {AssignmentGradeService.isFailingGrade(calcSOP)}
-        </div>
-        <div>Assignment Scores:</div>
-        {ClassroomService.renderAssignmentsGrades(student.getAssignmentGrades)}
-      </li>
-    </div>;
+    return (
+      <div>
+        <li>
+          <div>
+            <strong>{student.getFullname()}</strong>
+          </div>
+          <div>
+            Grade: {AssignmentGradeService.getLetterGrade(student.getId)} -{" "}
+            {calcSOP} {AssignmentGradeService.isFailingGrade(calcSOP)}
+          </div>
+          <div>Assignment Scores:</div>
+          {ClassroomService.renderAssignmentsGrades(classroom)}
+        </li>
+      </div>
+    );
   });
 
   return (
     <>
-      <ul className="studentList"></ul>
+      <ul className="studentList"> {getStudents} </ul>
     </>
   );
 }
